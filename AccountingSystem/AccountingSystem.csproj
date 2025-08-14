@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>10.0.0</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>{B8F1F8A8-7F3A-4F0E-9C0B-0E9D7F8A1B01}</ProjectGuid>
+		<ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>AccountingSystem</RootNamespace>
+		<AssemblyName>AccountingSystem</AssemblyName>
+		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<UseIISExpress>true</UseIISExpress>
+		<IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+		<Use64BitIISExpress>false</Use64BitIISExpress>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<MvcBuildViews>false</MvcBuildViews>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="System.Web" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Configuration" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Web.config" />
+		<Content Include="Site.Master" />
+		<Content Include="Default.aspx" />
+		<Content Include="Accounts.aspx" />
+		<Content Include="Journal.aspx" />
+		<Content Include="Ledger.aspx" />
+		<Content Include="TrialBalance.aspx" />
+		<Content Include="App_Data\Sql\01_CreateDatabase.sql" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="Global.asax.cs">
+			<DependentUpon>Global.asax</DependentUpon>
+		</Compile>
+		<Compile Include="Site.Master.cs">
+			<DependentUpon>Site.Master</DependentUpon>
+		</Compile>
+		<Compile Include="Site.Master.designer.cs">
+			<DependentUpon>Site.Master</DependentUpon>
+		</Compile>
+		<Compile Include="Default.aspx.cs">
+			<DependentUpon>Default.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Default.aspx.designer.cs">
+			<DependentUpon>Default.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Accounts.aspx.cs">
+			<DependentUpon>Accounts.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Accounts.aspx.designer.cs">
+			<DependentUpon>Accounts.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Journal.aspx.cs">
+			<DependentUpon>Journal.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Journal.aspx.designer.cs">
+			<DependentUpon>Journal.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Ledger.aspx.cs">
+			<DependentUpon>Ledger.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Ledger.aspx.designer.cs">
+			<DependentUpon>Ledger.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="TrialBalance.aspx.cs">
+			<DependentUpon>TrialBalance.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="TrialBalance.aspx.designer.cs">
+			<DependentUpon>TrialBalance.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Models\Account.cs" />
+		<Compile Include="Models\AccountType.cs" />
+		<Compile Include="Models\JournalEntry.cs" />
+		<Compile Include="Models\JournalLine.cs" />
+		<Compile Include="DAL\SqlConnectionFactory.cs" />
+		<Compile Include="DAL\ChartOfAccountsRepository.cs" />
+		<Compile Include="DAL\JournalRepository.cs" />
+		<Compile Include="DAL\LedgerRepository.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Global.asax" />
+	</ItemGroup>
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
