@@ -1,0 +1,101 @@
+@model ErpAccounting.Web.Models.JournalEntry
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+	ViewData["Title"] = "Create Journal Entry";
+	var accountList = (SelectList)ViewBag.AccountId;
+}
+<h1>Create Journal Entry</h1>
+<hr />
+<div class="row">
+	<div class="col-md-12">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="row g-3">
+				<div class="col-md-3">
+					<label asp-for="Date" class="form-label"></label>
+					<input asp-for="Date" class="form-control" />
+					<span asp-validation-for="Date" class="text-danger"></span>
+				</div>
+				<div class="col-md-3">
+					<label asp-for="Reference" class="form-label"></label>
+					<input asp-for="Reference" class="form-control" />
+				</div>
+				<div class="col-md-6">
+					<label asp-for="Description" class="form-label"></label>
+					<input asp-for="Description" class="form-control" />
+				</div>
+			</div>
+			<hr />
+			<table class="table" id="linesTable">
+				<thead>
+					<tr>
+						<th style="width:40%">Account</th>
+						<th style="width:20%">Debit</th>
+						<th style="width:20%">Credit</th>
+						<th style="width:20%">Memo</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.Lines.Count; i++)
+					{
+						<tr>
+							<td>
+								<select class="form-select" asp-for="Lines[@i].AccountId" asp-items="accountList">
+									<option value="">-- Select --</option>
+								</select>
+							</td>
+							<td><input class="form-control" asp-for="Lines[@i].Debit" /></td>
+							<td><input class="form-control" asp-for="Lines[@i].Credit" /></td>
+							<td><input class="form-control" asp-for="Lines[@i].Memo" /></td>
+							<td><button type="button" class="btn btn-outline-danger" onclick="removeRow(this)">Remove</button></td>
+						</tr>
+					}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5"><button type="button" class="btn btn-outline-primary" onclick="addRow()">Add Line</button></td>
+					</tr>
+				</tfoot>
+			</table>
+			<button type="submit" class="btn btn-primary">Create</button>
+			<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<script>
+		function addRow() {
+			const tableBody = document.querySelector('#linesTable tbody');
+			const index = tableBody.rows.length;
+			const row = tableBody.insertRow();
+			row.innerHTML = `
+				<td>
+					<select class="form-select" name="Lines[${index}].AccountId">
+						<option value="">-- Select --</option>
+						${Array.from(document.querySelectorAll('#linesTable tbody tr:first-child select option')).map(o => `<option value="${o.value}">${o.text}</option>`).join('')}
+					</select>
+				</td>
+				<td><input class="form-control" name="Lines[${index}].Debit" /></td>
+				<td><input class="form-control" name="Lines[${index}].Credit" /></td>
+				<td><input class="form-control" name="Lines[${index}].Memo" /></td>
+				<td><button type="button" class="btn btn-outline-danger" onclick="removeRow(this)">Remove</button></td>
+			`;
+		}
+		function removeRow(btn) {
+			const row = btn.closest('tr');
+			row.parentNode.removeChild(row);
+			renumberRows();
+		}
+		function renumberRows() {
+			const rows = document.querySelectorAll('#linesTable tbody tr');
+			rows.forEach((r, i) => {
+				const inputs = r.querySelectorAll('[name]');
+				inputs.forEach(input => {
+					input.name = input.name.replace(/Lines\[\d+\]/, `Lines[${i}]`);
+				});
+			});
+		}
+	</script>
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

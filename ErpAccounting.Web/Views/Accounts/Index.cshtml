@@ -1,0 +1,37 @@
+@model IEnumerable<ErpAccounting.Web.Models.Account>
+@{
+	ViewData["Title"] = "Accounts";
+}
+<h1>Accounts</h1>
+<p>
+	<a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Normal</th>
+			<th>Parent</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Code</td>
+				<td>@item.Name</td>
+				<td>@item.Type</td>
+				<td>@item.NormalBalance</td>
+				<td>@item.ParentAccount?.Name</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+					<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+					<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
