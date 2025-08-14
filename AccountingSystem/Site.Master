@@ -1,0 +1,35 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="AccountingSystem.SiteMaster" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+	<title>Accounting System</title>
+	<meta charset="utf-8" />
+	<style>
+		body { font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0; }
+		.nav { background: #1f2937; color: #fff; padding: 12px 16px; }
+		.nav a { color: #fff; text-decoration: none; margin-right: 12px; }
+		.container { padding: 16px; }
+		h1 { margin-top: 0; }
+		table { border-collapse: collapse; width: 100%; }
+		th, td { border: 1px solid #ddd; padding: 8px; }
+		th { background: #f3f4f6; text-align: left; }
+		.actions { margin-top: 12px; }
+		input[type=text], select { padding: 6px 8px; margin-right: 8px; }
+		button, input[type=submit] { padding: 6px 12px; }
+	</style>
+</head>
+<body>
+	<form id="form1" runat="server">
+		<div class="nav">
+			<a href="Default.aspx">Home</a>
+			<a href="Accounts.aspx">Accounts</a>
+			<a href="Journal.aspx">Journal</a>
+			<a href="Ledger.aspx">Ledger</a>
+			<a href="TrialBalance.aspx">Trial Balance</a>
+		</div>
+		<div class="container">
+			<asp:ContentPlaceHolder ID="MainContent" runat="server" />
+		</div>
+	</form>
+</body>
+</html>
