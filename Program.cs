@@ -1,9 +1,17 @@
+using AspnetCoreMvcFull.Application.Services;
+using AspnetCoreMvcFull.Domain.Ports;
+using AspnetCoreMvcFull.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Hexagonal/DDD/CQRS wiring
+builder.Services.AddSingleton<IProjectRepository, InMemoryProjectRepository>();
+builder.Services.AddScoped<ProjectAccountingService>();
 
 var app = builder.Build();
 
